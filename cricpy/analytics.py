@@ -80,20 +80,20 @@ def batsman4s(file, name="A Hookshot"):
     
     # Create a polynomial of degree 2
     poly = PolynomialFeatures(degree=2)
-    runsPoly = poly.fit_transform(runs.reshape(-1,1))
+    runsPoly = poly.fit_transform(runs.values.reshape(-1,1))
     linreg = LinearRegression().fit(runsPoly,x4s)
     
     plt.plot(runs,linreg.predict(runsPoly),'-r')
     
     # Predict the number of 4s for 50 runs
-    b=poly.fit_transform((np.array(50)))
+    b=poly.fit_transform((np.array(50).reshape(-1, 1)))
     c=linreg.predict(b)
     plt.axhline(y=c, color='b', linestyle=':')
     plt.axvline(x=50, color='b', linestyle=':')
     
     
     # Predict the number of 4s for 100 runs
-    b=poly.fit_transform((np.array(100)))
+    b=poly.fit_transform((np.array(100).reshape(-1, 1)))
     c=linreg.predict(b)
     plt.axhline(y=c, color='b', linestyle=':')
     plt.axvline(x=100, color='b', linestyle=':')
